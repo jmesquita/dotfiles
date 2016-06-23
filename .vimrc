@@ -113,6 +113,12 @@ set number
 set formatoptions+=nl
 set selection=inclusive
 
+if has("folding")
+    set foldenable
+    set foldmethod=marker
+    set foldlevel=100
+endif
+
 let html_use_css=1
 
 " Clear autocmds - starts from a clean slate
