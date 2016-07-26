@@ -244,6 +244,8 @@ set ai "Auto indent
 set si "Smart indent
 set nowrap "Don't Wrap lines (it is stupid)
 
+set clipboard=unnamed
+
 
 "------------------------------------------------------------------------------
 " Visual mode related
@@ -281,6 +283,9 @@ map <leader>bd :Bclose<cr>
 
 " Close all the buffers
 map <leader>bda :1,1000 bd!<cr>
+
+nnoremap <C-o> :bp!<CR>
+nnoremap <C-p> :bn!<CR>
 map q :bd!<CR>
 
 " Useful mappings for managing tabs
@@ -600,6 +605,11 @@ let g:neocomplete#force_omni_input_patterns.go = '[^.[:digit:] *\t]\.'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
+"------------------------------------------------------------------------------
+" Ctrlp 
+"------------------------------------------------------------------------------
+let g:ctrlp_map = '<c-y>'
+let g:ctrlp_cmd = 'CtrlY'
 
 "------------------------------------------------------------------------------
 " Airline
@@ -673,4 +683,7 @@ let g:tagbar_type_go = {
 "------------------------------------------------------------------------------
 " Language specific stuff
 "------------------------------------------------------------------------------
+"Javascript
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+"Markdown
+autocmd Filetype markdown setlocal wrap
