@@ -1,0 +1,13 @@
+[user]
+    email = jmesquita@sangoma.com
+    name = Joao Mesquita
+[status]
+    submoduleSummary = true
+[diff]
+    submodule = log
+[fetch]
+    recurseSubmodules = true
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
