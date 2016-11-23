@@ -484,31 +484,6 @@ catch
 endtry
 
 "------------------------------------------------------------------------------
-" NERDTree
-"------------------------------------------------------------------------------
-
-" General properties
-let NERDTreeDirArrows=1
-let NERDTreeMinimalUI=1
-let NERDTreeIgnore=['\.o$', '\.pyc$', '\.php\~$']
-let NERDTreeWinSize = 35
-
-" Make sure that when NT root is changed, Vim's pwd is also updated
-let NERDTreeChDirMode = 2
-let NERDTreeShowLineNumbers = 1
-let NERDTreeAutoCenter = 1
-
-" Open NERDTree on startup, when no file has been specified
-autocmd VimEnter * if !argc() | NERDTree | endif
-
-" Locate file in hierarchy quickly
-map <leader>T :NERDTreeFind<cr>
-
-" Toogle on/off
-nmap <leader>o :NERDTreeToggle<cr>
-
-
-"------------------------------------------------------------------------------
 " BufExplorer
 "------------------------------------------------------------------------------
 
@@ -686,5 +661,14 @@ let g:tagbar_type_go = {
 "------------------------------------------------------------------------------
 "Javascript
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+"Ruby
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 "Markdown
 autocmd Filetype markdown setlocal wrap
+
+"------------------------------------------------------------------------------
+" Change buffer cwd to files cwd
+"------------------------------------------------------------------------------
+
+" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+autocmd BufEnter * silent! lcd %:p:h
