@@ -20,6 +20,10 @@ Plug 'jmcantrell/vim-virtualenv'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'avakhov/vim-yaml'
+Plug 'pearofducks/ansible-vim'
+Plug 'vim-scripts/groovyindent'
+Plug 'HerringtonDarkholme/yats.vim'
 
 " Go
 Plug 'fatih/vim-go'
@@ -665,6 +669,8 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 "Markdown
 autocmd Filetype markdown setlocal wrap
+"Ruby
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 
 "------------------------------------------------------------------------------
 " Change buffer cwd to files cwd
