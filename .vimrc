@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 " Fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
 " cool bars
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -13,7 +14,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'
 " Indent text object
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'pignacio/vim-yapf-format'
 " Virtualenv
 Plug 'jmcantrell/vim-virtualenv'
@@ -24,6 +26,15 @@ Plug 'avakhov/vim-yaml'
 Plug 'pearofducks/ansible-vim'
 Plug 'vim-scripts/groovyindent'
 Plug 'HerringtonDarkholme/yats.vim'
+" Javascript
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'marijnh/tern_for_vim'
+"Markdown
+Plug 'JamshedVesuna/vim-markdown-preview'
+"API Blueprint
+Plug 'kylef/apiblueprint.vim'
 
 " Go
 Plug 'fatih/vim-go'
@@ -373,6 +384,29 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap < <gv
 vnoremap > >gv
 
+"------------------------------------------------------------------------------
+" NERDTree
+"------------------------------------------------------------------------------
+
+" General properties
+let NERDTreeDirArrows=1
+let NERDTreeMinimalUI=1
+let NERDTreeIgnore=['\.o$', '\.pyc$', '\.php\~$']
+let NERDTreeWinSize = 35
+
+" Make sure that when NT root is changed, Vim's pwd is also updated
+let NERDTreeChDirMode = 2
+let NERDTreeShowLineNumbers = 1
+let NERDTreeAutoCenter = 1
+
+" Open NERDTree on startup, when no file has been specified
+autocmd VimEnter * if !argc() | NERDTree | endif
+
+" Locate file in hierarchy quickly
+map <leader>T :NERDTreeFind<cr>
+
+" Toogle on/off
+nmap <leader>o :NERDTreeToggle<cr>
 
 "------------------------------------------------------------------------------
 " Ack searching and cope displaying
@@ -507,21 +541,6 @@ map <leader>gst :Gstatus<cr>
 map <leader>dup :diffupdate<cr>
 
 "------------------------------------------------------------------------------
-" Syntastic
-"------------------------------------------------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_python_checkers = ['flake8']
-
-"------------------------------------------------------------------------------
 " NeoComplete
 "------------------------------------------------------------------------------
 
@@ -567,7 +586,8 @@ let g:neocomplete#enable_auto_select = 1
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -588,8 +608,10 @@ let g:neocomplete#force_omni_input_patterns.go = '[^.[:digit:] *\t]\.'
 "------------------------------------------------------------------------------
 " Ctrlp 
 "------------------------------------------------------------------------------
-let g:ctrlp_map = '<c-y>'
-let g:ctrlp_cmd = 'CtrlY'
+let g:ctrlp_map = '<c-t>'
+let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader>T :CtrlP<cr>
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 "------------------------------------------------------------------------------
 " Airline
@@ -665,12 +687,17 @@ let g:tagbar_type_go = {
 "------------------------------------------------------------------------------
 "Javascript
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+let g:ale_fixers = {'javascript': ['prettier_standard']}
+"let g:ale_linters = {'javascript': ['']}
+let g:ale_fix_on_save = 1
 "Ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 "Markdown
 autocmd Filetype markdown setlocal wrap
+let vim_markdown_preview_browser='Google Chrome'
 "Ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+au BufNewFile,BufRead Jenkinsfile setf groovy
 
 "------------------------------------------------------------------------------
 " Change buffer cwd to files cwd

@@ -49,9 +49,10 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting)
+plugins=(git colored-man colorize github jira virtualenv pip python brew osx zsh-syntax-highlighting virtualenvwrapper shrink-path)
 
 # User configuration
+DEFAULT_USER=`whoami`
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -86,3 +87,10 @@ export EDITOR='vim'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export GOPATH=$HOME/Documents/Programacao/golang
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools/bin
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+export PATH="$HOME/.npm-packages/bin:$PATH"
+
+export PATH="$HOME/.yarn/bin:$PATH"
